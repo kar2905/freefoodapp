@@ -5,9 +5,9 @@ require("connect_db.php");
 $type = $_GET['type'];
 $lat = $_GET['lat'];
 $lng = $_GET['lng'];
+$radius = 0.2;
 
-
-$query = "SELECT ID,Location,StartTime,EndTime, ( 3959 * acos( cos( radians($lat) ) * cos( radians( Lat ) ) * cos( radians( Lng ) - radians($lng) ) + sin( radians($lat) ) * sin( radians( Lat ) ) ) ) AS distance FROM data HAVING distance < 10 ORDER BY distance";
+$query = "SELECT ID,Location,StartTime,EndTime, ( 3959 * acos( cos( radians($lat) ) * cos( radians( Lat ) ) * cos( radians( Lng ) - radians($lng) ) + sin( radians($lat) ) * sin( radians( Lat ) ) ) ) AS distance FROM data HAVING distance < $radius ORDER BY distance";
 //echo $query;
 $result = mysql_query($query) or die(mysql_error().$query);
 //$rows = mysql_fetch_assoc($result);
