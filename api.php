@@ -12,7 +12,7 @@ if($type=="xml"){
 
 $radius = 0.2;
 $now = time();
-$query = "SELECT ID,Location,Lat,Lng,StartTime,EndTime, ( 3959 * acos( cos( radians($lat) ) * cos( radians( Lat ) ) * cos( radians( Lng ) - radians($lng) ) + sin( radians($lat) ) * sin( radians( Lat ) ) ) ) AS distance FROM data HAVING distance < $radius AND EndTime < $now ORDER BY distance";
+$query = "SELECT ID,Location,Lat,Lng,StartTime,EndTime, ( 3959 * acos( cos( radians($lat) ) * cos( radians( Lat ) ) * cos( radians( Lng ) - radians($lng) ) + sin( radians($lat) ) * sin( radians( Lat ) ) ) ) AS distance FROM data HAVING distance < $radius AND EndTime > $now ORDER BY distance";
 //echo $query;
 $result = mysql_query($query) or die(mysql_error().$query);
 //$rows = mysql_fetch_assoc($result);
